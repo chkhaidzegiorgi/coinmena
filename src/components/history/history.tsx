@@ -15,7 +15,8 @@ export const History: FC<IProps> = ({ orders }) => {
           <tr>
             <th>Coin</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price Amount</th>
+            <th>Current price</th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +35,13 @@ export const History: FC<IProps> = ({ orders }) => {
                 <td>
                   {formatMoney({
                     currency: "USD",
-                    amount: order.coin.current_price * order.quantity,
+                    amount: order.price,
+                  }).toString()}
+                </td>
+                <td>
+                  {formatMoney({
+                    currency: "USD",
+                    amount: order.quantity * order.coin.current_price,
                   }).toString()}
                 </td>
               </tr>

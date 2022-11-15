@@ -8,5 +8,6 @@ export interface IAccount {
 export interface IOrder {
   quantity: number;
   currency: string;
+  price: number;
   coin: ICoin;
 }

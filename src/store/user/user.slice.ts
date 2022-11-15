@@ -12,7 +12,7 @@ export interface UserSlice {
 }
 
 const createUserSlice: StoreSlice<UserSlice> = (set, get) => ({
-  isAuthorized: true,
+  isAuthorized: false,
   login: async (username: string, password: string) => {
     const response = await login(username, password);
 
@@ -38,7 +38,8 @@ const createUserSlice: StoreSlice<UserSlice> = (set, get) => ({
     const newOrder: IOrder = {
       quantity,
       currency,
-      coin,
+      price: totalPrice,
+      coin: coin,
     };
 
     const orders = [...currentOrders, newOrder];
