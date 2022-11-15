@@ -34,3 +34,8 @@ export interface CointListQuery extends PaginationProps {
   order: string;
   sparkline: boolean;
 }
+
+export interface IMoney {
+  amount: number;
+  currency: string;
+}
