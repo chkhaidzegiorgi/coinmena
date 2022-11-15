@@ -7,10 +7,14 @@ import {
 import { Login } from "./pages/Login";
 import { Market } from "./pages/Market";
 import { Portfolio } from "./pages/Portfolio";
+import useStore from "./store";
+import { isAuthorizedSelector } from "./store/user/user.selector";
 
 const App = () => {
+  const isAuthenticated = useStore(isAuthorizedSelector);
+
   const defaultRouteProp: Omit<ProtectedRouteProps, "outlet"> = {
-    isAuthenticated: true,
+    isAuthenticated,
   };
 
   return (

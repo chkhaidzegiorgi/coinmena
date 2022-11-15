@@ -1,12 +1,6 @@
 import create, { StoreApi } from "zustand";
-import { persist, StateStorage } from "zustand/middleware";
-import { MMKVLoader } from "react-native-mmkv-storage";
 import createCoinsSlice, { CoinSlice } from "./coin/coins.slice";
 import createUserSlice, { UserSlice } from "./user/user.slice";
-
-const sessionStorage = new MMKVLoader()
-  .withInstanceID("sessionStorage")
-  .initialize();
 
 export type StoreState = CoinSlice & UserSlice;
 export type StoreSlice<T> = (
@@ -14,17 +8,9 @@ export type StoreSlice<T> = (
   get: StoreApi<StoreState>["getState"]
 ) => T;
 
-const useStore = create<StoreState>()(
-  persist(
-    (set, get) => ({
-      ...createCoinsSlice(set, get),
-      ...createUserSlice(set, get),
-    }),
-    {
-      name: "store",
-      getStorage: () => sessionStorage as StateStorage,
-    }
-  )
-);
+const useStore = create<StoreState>()((set, get) => ({
+  ...createCoinsSlice(set, get),
+  ...createUserSlice(set, get),
+}));
 
 export default useStore;

@@ -1,3 +1,5 @@
+import { PaginationProps } from "./pagination.type";
+
 export interface ICoin {
   id: string;
   symbol: string;
@@ -25,4 +27,10 @@ export interface ICoin {
   atl_date: Date;
   roi?: any;
   last_updated: Date;
+}
+
+export interface CointListQuery extends PaginationProps {
+  vs_currency: string;
+  order: string;
+  sparkline: boolean;
 }

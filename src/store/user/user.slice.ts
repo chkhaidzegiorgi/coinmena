@@ -1,13 +1,21 @@
+import { login } from "src/core/services";
 import { StoreSlice } from "../index";
 
 export interface UserSlice {
   isAuthorized: boolean;
-  setIsAuthorized: (value: boolean) => void;
+  login: (username: string, password: string) => void;
 }
 
 const createUserSlice: StoreSlice<UserSlice> = (set) => ({
-  isAuthorized: false,
-  setIsAuthorized: (value: boolean) => set({ isAuthorized: value }),
+  isAuthorized: true,
+  login: async (username: string, password: string) => {
+    const response = await login(username, password);
+
+    console.log(response, "response");
+    if (response && response.token) {
+      set({ isAuthorized: true });
+    }
+  },
 });
 
 export default createUserSlice;
