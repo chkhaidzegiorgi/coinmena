@@ -1,1 +1,1 @@
-export * from "./currency.type";
+export * from "./coin.type";
