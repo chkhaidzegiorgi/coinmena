@@ -1,13 +1,20 @@
 import { FC } from "react";
 import { formatMoney } from "src/core";
 import { ICoin } from "src/types";
+import { Paginator } from "../paginator";
 import { Wrapper } from "./coins.styles";
 
 interface IProps {
   coins: ICoin[];
+  onPageChange?(selectedItem: { selected: number }): void;
 }
 
-export const Coins: FC<IProps> = ({ coins }: IProps) => {
+// as I read documentation its 250 coins always
+// I made it constant because API does not gives
+// total amount of coins
+const PAGE_COUNT = 250 / 10;
+
+export const Coins: FC<IProps> = ({ coins, onPageChange }: IProps) => {
   return (
     <Wrapper>
       <table>
@@ -43,6 +50,8 @@ export const Coins: FC<IProps> = ({ coins }: IProps) => {
           })}
         </tbody>
       </table>
+
+      <Paginator pageCount={PAGE_COUNT} onPageChange={onPageChange} />
     </Wrapper>
   );
 };

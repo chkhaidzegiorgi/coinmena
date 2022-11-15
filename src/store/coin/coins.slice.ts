@@ -4,13 +4,14 @@ import { StoreSlice } from "..";
 
 export interface CoinSlice {
   coins: ICoin[];
-  filter: CointListQuery;
+  coinFilter: CointListQuery;
+  setCoinFilter: (page: number) => void;
   fetchCoins: () => void;
 }
 
 const createCoinsSlice: StoreSlice<CoinSlice> = (set, get) => ({
   coins: [],
-  filter: {
+  coinFilter: {
     page: 1,
     per_page: 10,
     order: "market_cap_desc",
@@ -18,10 +19,19 @@ const createCoinsSlice: StoreSlice<CoinSlice> = (set, get) => ({
     sparkline: false,
   },
   fetchCoins: async () => {
-    const filter = get().filter;
+    const filter = get().coinFilter;
     const coins = await fetchCoins(filter);
 
     set({ coins });
+  },
+  setCoinFilter: (page: number) => {
+    const filter = {
+      ...get().coinFilter,
+      page,
+    };
+    set({
+      coinFilter: filter,
+    });
   },
 });
 

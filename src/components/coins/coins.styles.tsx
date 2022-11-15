@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
 
   table tr:hover {
     background-color: #ddd;
+    cursor:pointer;
   }
 
   table th {
